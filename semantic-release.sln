@@ -1,6 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeLibrary", "src\SomeLibrary\SomeLibrary.csproj", "{4824747E-D7AE-4D58-A0B4-33AEF1C5AB08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeLibrary", "SomeLibrary\SomeLibrary.csproj", "{57529814-F5D3-4849-8FB9-03D8DF3436D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{891BB2E6-2E0F-4CF2-A0AE-37826013E395}"
+ProjectSection(SolutionItems) = preProject
+	azure-pipelines.yml = azure-pipelines.yml
+	.gitignore = .gitignore
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +14,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4824747E-D7AE-4D58-A0B4-33AEF1C5AB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4824747E-D7AE-4D58-A0B4-33AEF1C5AB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4824747E-D7AE-4D58-A0B4-33AEF1C5AB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4824747E-D7AE-4D58-A0B4-33AEF1C5AB08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57529814-F5D3-4849-8FB9-03D8DF3436D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57529814-F5D3-4849-8FB9-03D8DF3436D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57529814-F5D3-4849-8FB9-03D8DF3436D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57529814-F5D3-4849-8FB9-03D8DF3436D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
