@@ -20,7 +20,7 @@ variables:
   solutionName: 'semantic-release.sln'
   
 stages:
-- stage: 'Feature branch'
+- stage: Feature_branch
   condition: ne(variables['System.PullRequest.SourceBranch'], '')
   jobs:
   - job:
@@ -36,7 +36,7 @@ stages:
     steps:
       - script: dotnet test $solutionName
     
-- stage: 'Feature merged to main branch'
+- stage: Feature_merged_to_main_branch
   condition: eq(variables['System.PullRequest.SourceBranch'], '')
   jobs:
     - job:
@@ -54,7 +54,7 @@ stages:
     - job:
       displayName: Semantic-release
         
-- stage: 'Main is tagged and create and publish package'
+- stage: Main_is_tagged_and_create_and_publish_package
   jobs:
     - job:
       displayName: Release
