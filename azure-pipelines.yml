@@ -9,7 +9,7 @@ trigger:
       - main
   tags:
     include:
-      - '*'
+      - v*
 pr:
   - main
 
