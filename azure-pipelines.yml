@@ -26,15 +26,15 @@ stages:
   - job:
     displayName: 'Restore solution'
     steps:
-      script: 'dotnet restore $solutionName'
+      - script: 'dotnet restore $solutionName'
   - job:
     displayName: Build solution
     steps:
-      script: dotnet build $solutionName
+      - script: dotnet build $solutionName
   - job:
     displayName: Test solution
     steps:
-      script: dotnet test $solutionName
+      - script: dotnet test $solutionName
     
 - stage: Feature merged to main branch
   condition: eq(variables['System.PullRequest.SourceBranch'], '')
@@ -42,15 +42,15 @@ stages:
     - job:
       displayName: Restore solution
       steps:
-        script: dotnet restore $solutionName
+        - script: dotnet restore $solutionName
     - job:
       displayName: Build solution
       steps:
-        script: dotnet build $solutionName
+        - script: dotnet build $solutionName
     - job:
       displayName: Test solution
       steps:
-        script: dotnet test $solutionName
+        - script: dotnet test $solutionName
     - job:
       displayName: Semantic-release
         
@@ -59,7 +59,7 @@ stages:
     - job:
       displayName: Release
       steps:
-        script: dotnet build $solutionName
+        - script: dotnet build $solutionName
 #
 #steps:
 #  - task: DotNetCoreCLI@2
