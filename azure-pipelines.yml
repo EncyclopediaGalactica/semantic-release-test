@@ -23,16 +23,18 @@ stages:
 - stage: Feature_branch
   condition: ne(variables['System.PullRequest.SourceBranch'], '')
   jobs:
-  - job:
-    displayName: 'Restore solution'
+  - job: restore_solution
+    displayName: Restore solution
     steps:
-      - script: 'dotnet restore $solutionName'
-  - job:
-    displayName: 'Build solution'
+      - script: dotnet restore $solutionName
+  - job: build_solution
+    displayName: Build solution
+    dependsOn: restore_solution
     steps:
-      - script: 'dotnet build $solutionName'
-  - job:
+      - script: dotnet build $solutionName
+  - job: test_solution
     displayName: Test solution
+    dependsOn: build_solution
     steps:
       - script: dotnet test $solutionName
     
