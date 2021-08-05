@@ -24,42 +24,42 @@ stages:
   condition: ne(variables['System.PullRequest.SourceBranch'], '')
   jobs:
   - job:
-      displayName: 'Restore solution'
-      steps:
-        script: 'dotnet restore $solutionName'
+    displayName: 'Restore solution'
+    steps:
+      script: 'dotnet restore $solutionName'
   - job:
-      displayName: Build solution
-      steps:
-        script: dotnet build $solutionName
+    displayName: Build solution
+    steps:
+      script: dotnet build $solutionName
   - job:
-      displayName: Test solution
-      steps:
-        script: dotnet test $solutionName
+    displayName: Test solution
+    steps:
+      script: dotnet test $solutionName
     
 - stage: Feature merged to main branch
   condition: eq(variables['System.PullRequest.SourceBranch'], '')
   jobs:
     - job:
-        displayName: Restore solution
-        steps:
-          script: dotnet restore $solutionName
+      displayName: Restore solution
+      steps:
+        script: dotnet restore $solutionName
     - job:
-        displayName: Build solution
-        steps:
-          script: dotnet build $solutionName
+      displayName: Build solution
+      steps:
+        script: dotnet build $solutionName
     - job:
-        displayName: Test solution
-        steps:
-          script: dotnet test $solutionName
+      displayName: Test solution
+      steps:
+        script: dotnet test $solutionName
     - job:
-        displayName: Semantic-release
+      displayName: Semantic-release
         
 - stage: Main is tagged and create and publish package
   jobs:
     - job:
-        displayName: Release
-        steps:
-          - script: dotnet build $solutionName
+      displayName: Release
+      steps:
+        script: dotnet build $solutionName
 #
 #steps:
 #  - task: DotNetCoreCLI@2
