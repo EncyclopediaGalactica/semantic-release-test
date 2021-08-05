@@ -24,9 +24,9 @@ stages:
   condition: ne(variables['System.PullRequest.SourceBranch'], '')
   jobs:
   - job:
-      displayName: Restore solution
+      displayName: 'Restore solution'
       steps:
-        script: dotnet restore $solutionName
+        script: 'dotnet restore $solutionName'
   - job:
       displayName: Build solution
       steps:
