@@ -36,10 +36,11 @@ steps:
       projects: 'semantic-release.sln'
       
   - script: |
-      - npm install -g npm@6
-      - pip install --user bump2version
+      - npm install npm@6
       - npm install @semantic-release/changelog
       - npm install @semantic-release/exec
       - npm install @semantic-release/git
       - npm install @semantic-release/github
+      - pip install --user bump2version
+
 
