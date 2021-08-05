@@ -7,6 +7,9 @@ trigger:
   branches:
     include:
       - main
+  tags:
+    include:
+      - '*'
 pr:
   - main
 
@@ -14,37 +17,82 @@ pool: 'contabo'
 
 variables:
   buildConfiguration: 'Release'
-
-steps:
-  - task: DotNetCoreCLI@2
-    displayName: Restoring
-    inputs:
-      command: 'restore'
-      projects: 'semantic-release.sln'
-      feedsToUse: 'select'
-
-  - task: DotNetCoreCLI@2
-    displayName: Build - Debug
-    inputs:
-      command: 'build'
-      projects: 'semantic-release.sln'
-
-  - task: DotNetCoreCLI@2
-    displayName: Test
-    inputs:
-      command: 'test'
-      projects: 'semantic-release.sln'
-
-  - task: CmdLine@2
-    inputs:
-      script: 'npm install npm@6'
-
-  - script: |
-      which npm
-      which nodejs
-      npm install npm@6
-      npm install @semantic-release/changelog
-      npm install @semantic-release/exec
-      npm install @semantic-release/git
-      npm install @semantic-release/github
-      pip install --user bump2version
+  solutionName: 'semantic-release.sln'
+  
+stages:
+- stage: Feature_branch
+  condition: ne(variables['System.PullRequest.SourceBranch'], '')
+  jobs:
+  - job: restore_solution
+    displayName: Restore solution
+    steps:
+      - script: dotnet restore $solutionName
+  - job: build_solution
+    displayName: Build solution
+    dependsOn: restore_solution
+    steps:
+      - script: dotnet build $solutionName
+  - job: test_solution
+    displayName: Test solution
+    dependsOn: build_solution
+    steps:
+      - script: dotnet test $solutionName
+    
+- stage: Feature_merged_to_main_branch
+  condition: eq(variables['System.PullRequest.SourceBranch'], '')
+  jobs:
+    - job:
+      displayName: Restore solution
+      steps:
+        - script: dotnet restore $solutionName
+    - job:
+      displayName: Build solution
+      steps:
+        - script: dotnet build $solutionName
+    - job:
+      displayName: Test solution
+      steps:
+        - script: dotnet test $solutionName
+    - job:
+      displayName: Semantic-release
+        
+- stage: Main_is_tagged_and_create_and_publish_package
+  jobs:
+    - job:
+      displayName: Release
+      steps:
+        - script: dotnet build $solutionName
+#
+#steps:
+#  - task: DotNetCoreCLI@2
+#    displayName: Restoring
+#    inputs:
+#      command: 'restore'
+#      projects: 'semantic-release.sln'
+#      feedsToUse: 'select'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: Build - Debug
+#    inputs:
+#      command: 'build'
+#      projects: 'semantic-release.sln'
+#
+#  - task: DotNetCoreCLI@2
+#    displayName: Test
+#    inputs:
+#      command: 'test'
+#      projects: 'semantic-release.sln'
+#
+#  - task: CmdLine@2
+#    inputs:
+#      script: 'npm install npm@6'
+#
+#  - script: |
+#      which npm
+#      which nodejs
+#      npm install npm@6
+#      npm install @semantic-release/changelog
+#      npm install @semantic-release/exec
+#      npm install @semantic-release/git
+#      npm install @semantic-release/github
+#      pip install --user bump2version
