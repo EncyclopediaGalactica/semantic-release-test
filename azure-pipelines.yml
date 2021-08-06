@@ -18,6 +18,7 @@ pool: 'contabo'
 variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
+  GH_TOKEN: $(githubToken)
 
 stages:
   - stage: Feature_branch
@@ -94,6 +95,7 @@ stages:
         steps:
           - script: echo GH_TOKEN
           - script: echo $GH_TOKEN
+          - script: echo $(githubToken)
           - script: npx semantic-release
 
   - stage: Main_is_tagged_and_create_and_publish_package
