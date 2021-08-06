@@ -1,3 +1,11 @@
+## [0.1.4](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.3...0.1.4) (2021-08-06)
+
+
+### Bug Fixes
+
+* **build:** bump2version config ([#11](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/11)) ([c6e1039](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/c6e10392426a95ed29e3c2d531afbbd926a62f65))
+* **semver:** the first cycle ([#10](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/10)) ([7c99fa4](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/7c99fa4633d8409298958d0d19954b6a3c8b4a46))
+
 ## [0.1.3](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/v0.1.2...0.1.3) (2021-08-06)
 
 
