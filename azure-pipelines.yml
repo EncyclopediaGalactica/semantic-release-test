@@ -89,9 +89,9 @@ stages:
       - job:
         dependsOn: install_semantic
         displayName: Semantic Release
-        steps:
         variables:
           GH_TOKEN: $(GH_TOKEN)
+        steps:
           - script: npx semantic-release
 
   - stage: Main_is_tagged_and_create_and_publish_package
