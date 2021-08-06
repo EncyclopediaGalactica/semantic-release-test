@@ -92,6 +92,8 @@ stages:
         variables:
           GH_TOKEN: $(GH_TOKEN)
         steps:
+          - script: echo GH_TOKEN
+          - script: echo $GH_TOKEN
           - script: npx semantic-release
 
   - stage: Main_is_tagged_and_create_and_publish_package
