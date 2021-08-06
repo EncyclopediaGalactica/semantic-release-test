@@ -87,25 +87,27 @@ stages:
             displayName: semantic-release/changelog
           - script: |
               npm install @semantic-release/exec
-            displayName: exec
+            displayName: semantic-release/exec
           - script: |
               npm install @semantic-release/git
-            displayName: git
+            displayName: semantic-release/git
           - script: |
               npm install @semantic-release/github
-            displayName: github
+            displayName: semantic-release/github
           - script: |
-              echo $PATH
               pip3 install --user bump2version
-              bump2version --help
             displayName: bump2version
 
       - job:
         dependsOn: install_semantic
         displayName: Semantic Release
         steps:
-          - bash: |
+          - script: |
+              echo '##vso[task.prependpath]$(HOME)/.local/bin'
+            displayName: PATH
+          - script: |
               npx semantic-release
+            displayName: semantic-release
             env:
               GH_TOKEN: $(githubToken)
 
