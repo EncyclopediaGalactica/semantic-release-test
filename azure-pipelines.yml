@@ -77,22 +77,18 @@ stages:
         dependsOn: test_solution
         displayName: Install Semantic
         steps:
-          - script: |
-              npm install npm@6
-              npm install semantic-release
-              npm install @semantic-release/changelog
-              npm install @semantic-release/exec
-              npm install @semantic-release/git
-              npm install @semantic-release/github
-              pip install --user bump2version
+          - bash: npm install npm@6
+          - bash: npm install semantic-release
+          - bash: npm install @semantic-release/changelog
+          - bash: npm install @semantic-release/exec
+          - bash: npm install @semantic-release/git
+          - bash: npm install @semantic-release/github
+          - bash: pip install --user bump2version
 
       - job:
         dependsOn: install_semantic
         displayName: Semantic Release
         steps:
-          - bash: echo GH_TOKEN
-          - bash: echo $GH_TOKEN
-          - bash: echo $(GH_TOKEN)
           - bash: |
               echo $GH_TOKEN
               echo $(GH_TOKEN)
