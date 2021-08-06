@@ -25,7 +25,6 @@ stages:
       - job:
         steps:
           - script: |
-              echo '##vso[task.prependpath]/home/sayusi/.local/bin'
               echo $PATH
               env | sort
 
@@ -53,13 +52,6 @@ stages:
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
 
-      - job:
-        steps:
-          - script: |
-              echo '##vso[task.prependpath]/home/sayusi/.local/bin'
-              echo $PATH
-              env | sort
-
       - job: restore_solution
         displayName: Restore solution
         steps:
@@ -81,17 +73,32 @@ stages:
         dependsOn: test_solution
         displayName: Install Semantic
         steps:
-          - bash: npm install npm@6
-          - bash: npm install semantic-release
-          - bash: npm install @semantic-release/changelog
-          - bash: npm install @semantic-release/exec
-          - bash: npm install @semantic-release/git
-          - bash: npm install @semantic-release/github
-          - bash: |
+          - script: |
+              echo '##vso[task.prependpath]$(HOME)/.local/bin'
+            displayName: PATH
+          - script: |
+              npm install npm@6
+            displayName: npm@6
+          - script: | 
+              npm install semantic-release
+            displayName: semantic-release
+          - script: | 
+              npm install @semantic-release/changelog
+            displayName: semantic-release/changelog
+          - script: |
+              npm install @semantic-release/exec
+            displayName: exec
+          - script: |
+              npm install @semantic-release/git
+            displayName: git
+          - script: |
+              npm install @semantic-release/github
+            displayName: github
+          - script: |
               echo $PATH
-              pip3 uninstall -y bump2version
               pip3 install --user bump2version
               bump2version --help
+            displayName: bump2version
 
       - job:
         dependsOn: install_semantic
