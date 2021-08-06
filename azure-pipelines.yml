@@ -26,7 +26,7 @@ stages:
         steps:
           - script: |
               echo '##vso[task.prependpath]/home/sayusi/.local/bin'
-              echo '$PATH'
+              echo $PATH
               env | sort
 
   - stage: Feature_branch
