@@ -47,7 +47,7 @@ stages:
           - script: dotnet test $solutionName
 
   - stage: Feature_merged_to_main_branch
-    condition: eq(variables['System.PullRequest.SourceBranch'], '')
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],''))
     jobs:
       - job: dump_variables
         displayName: Dump variables
