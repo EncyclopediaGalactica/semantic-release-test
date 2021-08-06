@@ -78,19 +78,12 @@ stages:
         displayName: Install Semantic
         steps:
           - bash: npm install npm@6
-            name: npm@6
           - bash: npm install semantic-release
-            name: semantic-release
           - bash: npm install @semantic-release/changelog
-            name: @semantic-release/changelog
           - bash: npm install @semantic-release/exec
-            name: @semantic-release/exec
           - bash: npm install @semantic-release/git
-            name: @semantic-release/git
           - bash: npm install @semantic-release/github
-            name: @semantic-release/github
           - bash: pip install --user bump2version
-            name: bump2version
 
       - job:
         dependsOn: install_semantic
