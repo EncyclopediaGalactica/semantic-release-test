@@ -18,50 +18,93 @@ pool: 'contabo'
 variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
-  
+
 stages:
-- stage: Feature_branch
-  condition: ne(variables['System.PullRequest.SourceBranch'], '')
-  jobs:
-  - job: restore_solution
-    displayName: Restore solution
-    steps:
-      - script: dotnet restore $solutionName
-  - job: build_solution
-    displayName: Build solution
-    dependsOn: restore_solution
-    steps:
-      - script: dotnet build $solutionName
-  - job: test_solution
-    displayName: Test solution
-    dependsOn: build_solution
-    steps:
-      - script: dotnet test $solutionName
-    
-- stage: Feature_merged_to_main_branch
-  condition: eq(variables['System.PullRequest.SourceBranch'], '')
-  jobs:
-    - job:
-      displayName: Restore solution
-      steps:
-        - script: dotnet restore $solutionName
-    - job:
-      displayName: Build solution
-      steps:
-        - script: dotnet build $solutionName
-    - job:
-      displayName: Test solution
-      steps:
-        - script: dotnet test $solutionName
-    - job:
-      displayName: Semantic-release
-        
-- stage: Main_is_tagged_and_create_and_publish_package
-  jobs:
-    - job:
-      displayName: Release
-      steps:
-        - script: dotnet build $solutionName
+  - stage: Feature_branch
+    condition: ne(variables['System.PullRequest.SourceBranch'], '')
+    jobs:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
+      - job: restore_solution
+        dependsOn: dump_variables
+        displayName: Restore solution
+        steps:
+          - script: dotnet restore $solutionName
+
+      - job: build_solution
+        displayName: Build solution
+        dependsOn: restore_solution
+        steps:
+          - script: dotnet build $solutionName
+
+      - job: test_solution
+        displayName: Test solution
+        dependsOn: build_solution
+        steps:
+          - script: dotnet test $solutionName
+
+  - stage: Feature_merged_to_main_branch
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],''))
+    jobs:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
+
+      - job: restore_solution
+        dependsOn: dump_variables
+        displayName: Restore solution
+        steps:
+          - script: dotnet restore $solutionName
+
+      - job: build_solution
+        dependsOn: restore_solution
+        displayName: Build solution
+        steps:
+          - script: dotnet build $solutionName
+
+      - job: test_solution
+        dependsOn: build_solution
+        displayName: Test solution
+        steps:
+          - script: dotnet test $solutionName
+
+      - job: install_semantic
+        dependsOn: test_solution
+        displayName: Install Semantic
+        steps:
+          - script: |
+              npm install npm@6
+              npm install @semantic-release/changelog
+              npm install @semantic-release/exec
+              npm install @semantic-release/git
+              npm install @semantic-release/github
+              pip install --user bump2version
+
+      - job:
+        dependsOn: install_semantic
+        displayName: Semantic Release
+        steps:
+          - script: npx semantic-release
+
+  - stage: Main_is_tagged_and_create_and_publish_package
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), ne(variables['Build.SourceBranch'],''))
+    jobs:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
+
+      - job: release
+        dependsOn: dump_variables
+        displayName: Release
+        steps:
+          - script: dotnet build $solutionName
 #
 #steps:
 #  - task: DotNetCoreCLI@2
