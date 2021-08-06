@@ -18,7 +18,6 @@ pool: 'contabo'
 variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
-  GITHUB_SECRET_TOKEN: $(githubToken)
 
 stages:
   - stage: Feature_branch
@@ -90,13 +89,16 @@ stages:
       - job:
         dependsOn: install_semantic
         displayName: Semantic Release
-        variables:
-          GH_TOKEN: $(GITHUB_SECRET_TOKEN)
         steps:
-          - script: echo GH_TOKEN
-          - script: echo $GH_TOKEN
-          - script: echo $(GH_TOKEN)
-          - script: npx semantic-release
+          - bash: echo GH_TOKEN
+          - bash: echo $GH_TOKEN
+          - bash: echo $(GH_TOKEN)
+          - bash: |
+              echo $GH_TOKEN
+              echo $(GH_TOKEN)
+              npx semantic-release
+            env:
+              GH_TOKEN: $(githubToken)
 
   - stage: Main_is_tagged_and_create_and_publish_package
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), ne(variables['Build.SourceBranch'],'refs/heads/main'))
