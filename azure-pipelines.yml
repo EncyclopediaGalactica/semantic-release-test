@@ -19,6 +19,10 @@ variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
 
+steps:
+  - script: |
+      env | sort
+
 stages:
   - stage: Feature_branch
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
@@ -79,6 +83,7 @@ stages:
           - script: npx semantic-release
 
   - stage: Main_is_tagged_and_create_and_publish_package
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), neq(variables['Build.SourceBranch'],''))
     jobs:
       - job:
         displayName: Release
