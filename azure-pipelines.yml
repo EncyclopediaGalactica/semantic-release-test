@@ -91,7 +91,8 @@ stages:
         dependsOn: install_semantic
         displayName: Semantic Release
         variables:
-          GH_TOKEN: $(GH_TOKEN)
+          env:
+            GH_TOKEN: $(GH_TOKEN)
         steps:
           - script: echo GH_TOKEN
           - script: echo $GH_TOKEN
