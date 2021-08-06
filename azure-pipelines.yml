@@ -90,7 +90,7 @@ stages:
         dependsOn: install_semantic
         displayName: Semantic Release
         steps:
-        env: 
+        variables:
           GH_TOKEN: $(GH_TOKEN)
           - script: npx semantic-release
 
