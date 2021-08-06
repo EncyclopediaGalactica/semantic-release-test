@@ -18,7 +18,7 @@ pool: 'contabo'
 variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
-  GITHUBTOKEN: $(githubToken)
+  GITHUB_SECRET_TOKEN: $(githubToken)
 
 stages:
   - stage: Feature_branch
@@ -91,7 +91,7 @@ stages:
         dependsOn: install_semantic
         displayName: Semantic Release
         variables:
-          GH_TOKEN: $(GITHUBTOKEN)
+          GH_TOKEN: $(GITHUB_SECRET_TOKEN)
         steps:
           - script: echo GH_TOKEN
           - script: echo $GH_TOKEN
