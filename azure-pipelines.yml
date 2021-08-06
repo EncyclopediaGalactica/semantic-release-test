@@ -79,6 +79,7 @@ stages:
         steps:
           - script: |
               npm install npm@6
+              npm install semantic-release
               npm install @semantic-release/changelog
               npm install @semantic-release/exec
               npm install @semantic-release/git
