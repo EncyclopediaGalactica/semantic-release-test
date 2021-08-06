@@ -25,7 +25,10 @@ stages:
       - job:
         steps:
           - pwsh: ##vso[task.prependpath]/home/sayusi/.local/bin
-          - bash: env | sort
+          - bash: |
+              env | sort
+              echo $PATH
+
 
   - stage: Feature_branch
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
