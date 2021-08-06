@@ -47,7 +47,7 @@ stages:
           - script: dotnet test $solutionName
 
   - stage: Feature_merged_to_main_branch
-    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],''))
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
       - job: dump_variables
         displayName: Dump variables
@@ -92,7 +92,7 @@ stages:
           - script: npx semantic-release
 
   - stage: Main_is_tagged_and_create_and_publish_package
-    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), ne(variables['Build.SourceBranch'],''))
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), ne(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
       - job: dump_variables
         displayName: Dump variables
