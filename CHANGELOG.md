@@ -1,3 +1,10 @@
+## [0.1.6](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/v0.1.5...0.1.6) (2021-08-06)
+
+
+### Bug Fixes
+
+* **build:** trigger order ([#12](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/12)) ([a9141fc](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/a9141fc80dc984bd9f8dd1004bf999199cabdf09))
+
 ## [0.1.4](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.3...0.1.4) (2021-08-06)
 
 
