@@ -19,15 +19,17 @@ variables:
   buildConfiguration: 'Release'
   solutionName: 'semantic-release.sln'
 
-steps:
-  - script: |
-      env | sort
-
 stages:
   - stage: Feature_branch
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
     jobs:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
       - job: restore_solution
+        dependsOn: dump_variables
         displayName: Restore solution
         steps:
           - script: dotnet restore $solutionName
@@ -47,7 +49,14 @@ stages:
   - stage: Feature_merged_to_main_branch
     condition: eq(variables['System.PullRequest.SourceBranch'], '')
     jobs:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
+
       - job: restore_solution
+        dependsOn: dump_variables
         displayName: Restore solution
         steps:
           - script: dotnet restore $solutionName
@@ -85,7 +94,14 @@ stages:
   - stage: Main_is_tagged_and_create_and_publish_package
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), neq(variables['Build.SourceBranch'],''))
     jobs:
-      - job:
+      - job: dump_variables
+        displayName: Dump variables
+        steps:
+          - script: |
+              env | sort
+
+      - job: release
+        dependsOn: dump_variables
         displayName: Release
         steps:
           - script: dotnet build $solutionName
