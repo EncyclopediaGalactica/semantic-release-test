@@ -53,6 +53,13 @@ stages:
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
 
+      - job:
+        steps:
+          - script: |
+              echo '##vso[task.prependpath]/home/sayusi/.local/bin'
+              echo $PATH
+              env | sort
+
       - job: restore_solution
         displayName: Restore solution
         steps:
