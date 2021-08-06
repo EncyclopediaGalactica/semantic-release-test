@@ -84,7 +84,7 @@ stages:
           - bash: npm install @semantic-release/git
           - bash: npm install @semantic-release/github
           - bash: |
-              pip3 uninstall --no-input bump2version
+              pip3 uninstall -y bump2version
               pip3 install --user bump2version
               bump2version --help
 
