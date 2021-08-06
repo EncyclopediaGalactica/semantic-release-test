@@ -20,15 +20,14 @@ variables:
   solutionName: 'semantic-release.sln'
 
 stages:
-  - stage:
+  - stage: Variables
     jobs:
       - job:
         steps:
-          - bash: |
+          - script: |
               echo '##vso[task.prependpath]/home/sayusi/.local/bin'
+              echo '$PATH'
               env | sort
-              echo $PATH
-
 
   - stage: Feature_branch
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
