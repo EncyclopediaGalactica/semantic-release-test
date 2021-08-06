@@ -34,7 +34,6 @@ stages:
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
     jobs:
       - job: restore_solution
-        dependsOn: dump_variables
         displayName: Restore solution
         steps:
           - script: dotnet restore $solutionName
@@ -56,7 +55,6 @@ stages:
     jobs:
 
       - job: restore_solution
-        dependsOn: dump_variables
         displayName: Restore solution
         steps:
           - script: dotnet restore $solutionName
@@ -103,7 +101,6 @@ stages:
     jobs:
 
       - job: release
-        dependsOn: dump_variables
         displayName: Release
         steps:
           - script: dotnet build $solutionName
