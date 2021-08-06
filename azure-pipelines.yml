@@ -4,12 +4,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-  branches:
-    include:
-      - main
   tags:
     include:
       - v*
+  branches:
+    include:
+      - main
+  
 pr:
   - main
 
