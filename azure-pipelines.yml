@@ -24,8 +24,8 @@ stages:
     jobs:
       - job:
         steps:
-          - pwsh: ##vso[task.prependpath]/home/sayusi/.local/bin
           - bash: |
+              echo '##vso[task.prependpath]/home/sayusi/.local/bin'
               env | sort
               echo $PATH
 
