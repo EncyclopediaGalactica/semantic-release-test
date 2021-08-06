@@ -41,20 +41,25 @@ stages:
 - stage: Feature_merged_to_main_branch
   condition: eq(variables['System.PullRequest.SourceBranch'], '')
   jobs:
-    - job:
+    - job: restore_solution
       displayName: Restore solution
       steps:
         - script: dotnet restore $solutionName
-    - job:
+    - job: build_solution
+      dependsOn: restore_solution
       displayName: Build solution
       steps:
         - script: dotnet build $solutionName
-    - job:
+    - job: test_solution
+      dependsOn: build_solution
       displayName: Test solution
       steps:
         - script: dotnet test $solutionName
     - job:
+      dependsOn: test_solution
       displayName: Semantic-release
+      steps:
+        - script: npx semantic-release
         
 - stage: Main_is_tagged_and_create_and_publish_package
   jobs:
