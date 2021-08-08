@@ -6,6 +6,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 ProjectSection(SolutionItems) = preProject
 	azure-pipelines.yml = azure-pipelines.yml
 	.gitignore = .gitignore
+	README.md = README.md
+	.bumpversion.cfg = .bumpversion.cfg
+	.releaserc = .releaserc
 EndProjectSection
 EndProject
 Global
