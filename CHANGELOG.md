@@ -1,3 +1,12 @@
+## [0.1.10](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.9...0.1.10) (2021-08-08)
+
+
+### Bug Fixes
+
+* **build:** master trigger ([#17](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/17)) ([c180dd0](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/c180dd0a41c36e26a26dc03998a26a43e65d3d9d))
+* **build:** skipping some stuff ([#16](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/16)) ([fe29e1d](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/fe29e1d00d6f445b3d499a33fa18b1506e88806e))
+* **build:** typo ([#18](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/18)) ([8ea5046](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/8ea50465b2f83f3539177d83c7267e7b2ccc61e8))
+
 ## [0.1.9](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.8...0.1.9) (2021-08-08)
 
 
