@@ -46,7 +46,7 @@ stages:
         steps:
           - script: dotnet test $solutionName
 
-  - stage: Feature_merged_to_main_branch
+  - stage: Main_branch
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
 
