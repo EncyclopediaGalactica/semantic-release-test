@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.6...0.1.7) (2021-08-08)
+
+
+### Bug Fixes
+
+* readme.md fix ([#13](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/13)) ([59f4c92](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/59f4c92165f1c02b2708133ceecd5daa76e60c0a))
+
 ## [0.1.6](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/v0.1.5...0.1.6) (2021-08-06)
 
 
