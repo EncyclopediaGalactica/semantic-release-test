@@ -1,3 +1,3 @@
 # semantic-release-test
 
-Actual version is: 0.1.8
+Actual version is: 0.1.9
