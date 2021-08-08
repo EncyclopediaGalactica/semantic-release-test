@@ -99,7 +99,7 @@ stages:
               pip3 install --user bump2version
             displayName: bump2version
 
-      - job:
+      - job: semantic_release
         dependsOn: install_semantic
         displayName: Semantic Release
         steps:
@@ -112,45 +112,11 @@ stages:
             env:
               GH_TOKEN: $(githubToken)
 
-  - stage: Main_is_tagged_and_create_and_publish_package
-    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), ne(variables['Build.SourceBranch'],'refs/heads/main'))
-    jobs:
-
-      - job: release
-        displayName: Release
+      - job: release_build
+        dependsOn: semantic_release
+        displayName: Release build
         steps:
-          - script: dotnet build $solutionName
-#
-#steps:
-#  - task: DotNetCoreCLI@2
-#    displayName: Restoring
-#    inputs:
-#      command: 'restore'
-#      projects: 'semantic-release.sln'
-#      feedsToUse: 'select'
-#
-#  - task: DotNetCoreCLI@2
-#    displayName: Build - Debug
-#    inputs:
-#      command: 'build'
-#      projects: 'semantic-release.sln'
-#
-#  - task: DotNetCoreCLI@2
-#    displayName: Test
-#    inputs:
-#      command: 'test'
-#      projects: 'semantic-release.sln'
-#
-#  - task: CmdLine@2
-#    inputs:
-#      script: 'npm install npm@6'
-#
-#  - script: |
-#      which npm
-#      which nodejs
-#      npm install npm@6
-#      npm install @semantic-release/changelog
-#      npm install @semantic-release/exec
-#      npm install @semantic-release/git
-#      npm install @semantic-release/github
-#      pip install --user bump2version
+          - script: |
+              dotnet build $solutionName
+            displayName: Release build
+  
