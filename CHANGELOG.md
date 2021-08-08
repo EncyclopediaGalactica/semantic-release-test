@@ -1,3 +1,10 @@
+## [0.1.9](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.8...0.1.9) (2021-08-08)
+
+
+### Bug Fixes
+
+* no triggers ([#15](https://github.com/EncyclopediaGalactica/semantic-release-test/issues/15)) ([ea76350](https://github.com/EncyclopediaGalactica/semantic-release-test/commit/ea763504cf0f20d0f9775855d87ee2dadb4b6380))
+
 ## [0.1.8](https://github.com/EncyclopediaGalactica/semantic-release-test/compare/0.1.7...0.1.8) (2021-08-08)
 
 
